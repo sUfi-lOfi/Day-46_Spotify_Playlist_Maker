@@ -1,10 +1,7 @@
-import requests
-from bs4 import BeautifulSoup
 import datetime as dt
+from spotify_config import Spotify
 from billboard import BillBoard
-
-
-#------------Date Validator-------------#
+# #-----------Date Validator-------------#
 def input_date():
     date_today = dt.datetime.now()
     user_input = input("Enter the particular date you want the playlist of (YYYY-MM-DD) : ")
@@ -20,6 +17,12 @@ def input_date():
             print("You can't a date in future!!")
             input_date()
 date = input_date()
-
+#
 billboard = BillBoard()
-songs_list = billboard.fetch_songs()
+spotify = Spotify()
+songs_title_list = billboard.fetch_songs(date)
+print(songs_title_list)
+spotify.create_playlist(date)
+songs = spotify.search_songs(songs_title_list)
+spotify.add_songs(songs)
+

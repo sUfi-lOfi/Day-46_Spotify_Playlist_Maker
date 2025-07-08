@@ -1,6 +1,7 @@
 import datetime as dt
 import requests
 from bs4 import BeautifulSoup
+import lxml
 class BillBoard:
     def __init__(self):
         self.url = "https://www.billboard.com/charts/hot-100/"
@@ -16,7 +17,7 @@ class BillBoard:
         else:
                 soup = BeautifulSoup(http_response,"lxml")
                 names_of_songs = soup.select("ul li ul li h3")
-                print([n.getText().strip() for n in names_of_songs])
+                return [n.getText().strip() for n in names_of_songs]
 
 
 
